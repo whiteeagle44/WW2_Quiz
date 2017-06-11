@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">WW2 Quiz</string>
+
+    <string name="question_one_easy">Giving Hitler Czechoslovakia almost prevented II World War</string>
+    <string name="question_two_easy">The Phoney War caused great damage to Germany</string>
+    <string name="question_three_easy">Germany- Russia treaty was called "Ribbentrop-Molotow" from the surnames of signers</string>
+    <string name="question_four_easy">Germany\'s occupation of France started in 1941</string>
+    <string name="question_five_easy">RAF succeeded in keeping Hitler out of Great Britain</string>
+
+    <!--<string name="easy_pic_1">R.drawable.ww2_easy1</string>-->
+    <!--<string name="easy_pic_2">R.drawable.ww2_easy2</string>-->
+    <!--<string name="easy_pic_3">R.drawable.ww2_easy3</string>-->
+    <!--<string name="easy_pic_4">R.drawable.ww2_easy4</string>-->
+    <!--<string name="easy_pic_5">R.drawable.ww2_easy5</string>-->
+    <!--<string name="easy_pic_6">R.drawable.ww2_easy6</string>-->
+    <!--<string name="easy_pic_7">R.drawable.ww2_easy7</string>-->
+    <!--<string name="easy_pic_8">R.drawable.ww2_easy8</string>-->
+    <!--<string name="easy_pic_9">R.drawable.ww2_easy9</string>-->
+    <!--<string name="easy_pic_10">R.drawable.ww2_easy10</string>-->
+
+    <!--<string name="medium_pic_1">R.drawable.ww2_score_rating</string>-->
+    <!--<string name="medium_pic_2">R.drawable.ww2_medium2</string>-->
+    <!--<string name="medium_pic_3">R.drawable.ww2_medium3</string>-->
+    <!--<string name="medium_pic_4">R.drawable.ww2_medium4</string>-->
+    <!--<string name="medium_pic_5">R.drawable.ww2_medium5</string>-->
+    <!--<string name="medium_pic_6">R.drawable.ww2_medium6</string>-->
+    <!--<string name="medium_pic_7">R.drawable.ww2_medium7</string>-->
+    <!--<string name="medium_pic_8">R.drawable.ww2_medium8</string>-->
+    <!--<string name="medium_pic_9">R.drawable.ww2_medium9</string>-->
+    <!--<string name="medium_pic_10">R.drawable.ww2_medium10</string>-->
+
+    <!--<string name="hard_pic_1">R.drawable.ww2_hard1</string>-->
+    <!--<string name="hard_pic_2">R.drawable.ww2_hard2</string>-->
+    <!--<string name="hard_pic_3">R.drawable.ww2_hard3</string>-->
+    <!--<string name="hard_pic_4">R.drawable.ww2_hard4</string>-->
+    <!--<string name="hard_pic_5">R.drawable.ww2_hard5</string>-->
+    <!--<string name="hard_pic_6">R.drawable.ww2_hard6</string>-->
+    <!--<string name="hard_pic_7">R.drawable.ww2_hard7</string>-->
+    <!--<string name="hard_pic_8">R.drawable.ww2_hard8</string>-->
+    <!--<string name="hard_pic_9">R.drawable.ww2_hard9</string>-->
+    <!--<string name="hard_pic_10">R.drawable.ww2_hard10</string>-->
+
+
+
+
+    <string name="true_button">True</string>
+    <string name="false_button">False</string>
+    <string name="next_button">Next</string>
+    <string name="correct_toast">Correct!</string>
+    <string name="incorrect_toast">Incorrect!</string>
+
+
+</resources>
