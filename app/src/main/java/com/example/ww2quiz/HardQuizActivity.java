@@ -1,4 +1,4 @@
-package com.example.android.ww2quiz;
+package com.example.ww2quiz;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,22 +8,15 @@ import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-/**
- * Created by User on 27.05.2017.
- */
-
 public class HardQuizActivity extends AppCompatActivity {
     private Button mTrueButton;
     private Button mFalseButton;
-    private ImageButton mNextButton;
-    private ImageButton mPrevButton;
     private TextView mQuestionTextView;
     private ImageView mHeaderImage;
     private ProgressBar mProgressBar;
@@ -46,9 +39,6 @@ public class HardQuizActivity extends AppCompatActivity {
     private int mAllAnswers;
     private int mCorrectAnswers;
 
-
-
-
     private Question[] mQuestionBankEasy = new Question[]
             {
                     new Question(R.string.question_one_easy, false, R.drawable.ww2_hard1),
@@ -62,7 +52,6 @@ public class HardQuizActivity extends AppCompatActivity {
                     new Question(R.string.question_four_easy, true, R.drawable.ww2_hard9),
                     new Question(R.string.question_five_easy, true, R.drawable.ww2_hard10),
             };
-
 
     private int mCurrentIndex = 0;
 
@@ -94,71 +83,55 @@ public class HardQuizActivity extends AppCompatActivity {
 //            }
         }
 
-        mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
+        mQuestionTextView = findViewById(R.id.question_text_view);
         updateQuestion();
 
         mAllAnswers = mQuestionBankEasy.length;
 
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        mProgressBar = findViewById(R.id.progressBar);
         mProgressBar.setProgress(mCurrentIndex);
         mProgressBar.setMax(10);
 
-        mHeaderImage = (ImageView) findViewById(R.id.header_image);
+        mHeaderImage = findViewById(R.id.header_image);
 
-        mNextButton = (ImageButton) findViewById(R.id.next_button);
-        mNextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mCurrentIndex >= mQuestionBankEasy.length - 1) {
-                    Intent mIntent = new Intent(HardQuizActivity.this, ResultsActivity.class);
-                    mIntent.putExtra("allAnswers", mAllAnswers);
-                    mIntent.putExtra("correctAnswers", mCorrectAnswers);
-                    startActivity(mIntent);
-                } else {
-                    mCurrentIndex += 1;
-                    updateQuestion();
-                    mProgressBar.setProgress(mCurrentIndex);
-                    mTrueButton.getBackground().clearColorFilter();
-                    mFalseButton.getBackground().clearColorFilter();
-                }
-                Log.i(TAG, "Current index" + mCurrentIndex);
+        ImageButton mNextButton = findViewById(R.id.next_button);
+        mNextButton.setOnClickListener(v -> {
+            if(mCurrentIndex >= mQuestionBankEasy.length - 1) {
+                Intent mIntent = new Intent(HardQuizActivity.this, ResultsActivity.class);
+                mIntent.putExtra("allAnswers", mAllAnswers);
+                mIntent.putExtra("correctAnswers", mCorrectAnswers);
+                startActivity(mIntent);
+            } else {
+                mCurrentIndex += 1;
+                updateQuestion();
+                mProgressBar.setProgress(mCurrentIndex);
+                mTrueButton.getBackground().clearColorFilter();
+                mFalseButton.getBackground().clearColorFilter();
             }
+            Log.i(TAG, "Current index" + mCurrentIndex);
         });
 
 
-        mPrevButton = (ImageButton) findViewById(R.id.prev_button);
-        mPrevButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mCurrentIndex != 0) {
-                    mCurrentIndex -= 1;
-                    updateQuestion();
-                    mProgressBar.setProgress(mCurrentIndex);
-                    mTrueButton.getBackground().clearColorFilter();
-                    mFalseButton.getBackground().clearColorFilter();
-                } else {
-                    Intent mIntent = new Intent(HardQuizActivity.this, MainActivity.class);
-                    startActivity(mIntent);
-                }
+        ImageButton mPrevButton = findViewById(R.id.prev_button);
+        mPrevButton.setOnClickListener(v -> {
+            if(mCurrentIndex != 0) {
+                mCurrentIndex -= 1;
+                updateQuestion();
+                mProgressBar.setProgress(mCurrentIndex);
+                mTrueButton.getBackground().clearColorFilter();
+                mFalseButton.getBackground().clearColorFilter();
+            } else {
+                Intent mIntent = new Intent(HardQuizActivity.this, MainActivity.class);
+                startActivity(mIntent);
             }
         });
 
-        mTrueButton = (Button) findViewById(R.id.true_button);
-        mFalseButton = (Button) findViewById(R.id.false_button);
+        mTrueButton = findViewById(R.id.true_button);
+        mFalseButton = findViewById(R.id.false_button);
 
-        mTrueButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkAnswer(true);
-            }
-        });
+        mTrueButton.setOnClickListener(v -> checkAnswer(true));
 
-        mFalseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkAnswer(false);
-            }
-        });
+        mFalseButton.setOnClickListener(v -> checkAnswer(false));
     }
 
     @Override
@@ -177,7 +150,7 @@ public class HardQuizActivity extends AppCompatActivity {
         int question = mQuestionBankEasy[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
 
-        mHeaderImage = (ImageView) findViewById(R.id.header_image);
+        mHeaderImage = findViewById(R.id.header_image);
         int picResId = mQuestionBankEasy[mCurrentIndex].getPicResId();
         mHeaderImage.setImageResource(picResId);
     }
@@ -215,7 +188,8 @@ public class HardQuizActivity extends AppCompatActivity {
 
                     Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
                     // Vibrate for 150 milliseconds
-                    v.vibrate(150);
+                    if (v != null)
+                        v.vibrate(150);
                 } else {
                     mFalseButton.getBackground().setColorFilter(mIncorrectAnswerColor, PorterDuff.Mode.MULTIPLY);
                     mTrueButton.getBackground().setColorFilter(mCorrectAnswerColor, PorterDuff.Mode.MULTIPLY);
@@ -226,7 +200,8 @@ public class HardQuizActivity extends AppCompatActivity {
 
                     Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
                     // Vibrate for 150 milliseconds
-                    v.vibrate(100);
+                    if (v != null)
+                        v.vibrate(100);
                 }
             }
         }

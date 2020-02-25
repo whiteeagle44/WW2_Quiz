@@ -1,8 +1,4 @@
-package com.example.android.ww2quiz;
-
-/**
- * Created by User on 27.05.2017.
- */
+package com.example.ww2quiz;
 
 public class Question {
 
@@ -15,27 +11,23 @@ public class Question {
 
     private boolean mAnswerRated;
 
-
-    public Question() { }
-
     public Question(int allAnswers,int correctAnswers) {
         mAllAnswers = allAnswers;
         mCorrectAnswers = correctAnswers;
-
     }
 
-    public Question(int textResId, boolean answerTrue, int picResId) {
+    Question(int textResId, boolean answerTrue, int picResId) {
         mTextResId = textResId;
         mAnswerTrue = answerTrue;
         mPicResId = picResId;
 
     }
 
-    public boolean isAnswerRated() {
+    boolean isAnswerRated() {
         return mAnswerRated;
     }
 
-    public void setAnswerRated(boolean answerRated) {
+    void setAnswerRated(boolean answerRated) {
         mAnswerRated = answerRated;
     }
 
@@ -55,7 +47,7 @@ public class Question {
         mCorrectAnswers = correctAnswers;
     }
 
-    public int getTextResId() {
+    int getTextResId() {
         return mTextResId;
     }
 
@@ -63,7 +55,7 @@ public class Question {
         mTextResId = textResId;
     }
 
-    public boolean isAnswerTrue() {
+    boolean isAnswerTrue() {
         return mAnswerTrue;
     }
 
@@ -72,7 +64,7 @@ public class Question {
     }
 
 
-    public int getPicResId() {
+    int getPicResId() {
         return mPicResId;
     }
 

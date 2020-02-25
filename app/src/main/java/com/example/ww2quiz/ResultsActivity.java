@@ -1,4 +1,4 @@
-package com.example.android.ww2quiz;
+package com.example.ww2quiz;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -16,19 +16,9 @@ import com.github.mikephil.charting.data.PieEntry;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.android.ww2quiz.R.id.chart;
-
-/**
- * Created by User on 02.06.2017.
- */
+import static com.example.ww2quiz.R.id.chart;
 
 public class ResultsActivity extends AppCompatActivity {
-
-    private int mAllAnswers;
-    private int mCorrectAnswers;
-    private int mIncorrectAnswers;
-
-    private static final String TAG = "ResultsActivity";
 
     private TextView scoreRating;
 
@@ -37,14 +27,14 @@ public class ResultsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.results);
 
-        final PieChart pieChart = (PieChart) findViewById(chart);
+        final PieChart pieChart = findViewById(chart);
 
         Intent mIntent = getIntent();
-        mAllAnswers = mIntent.getIntExtra("allAnswers", 10);
-        mCorrectAnswers = mIntent.getIntExtra("correctAnswers", 4);
-        mIncorrectAnswers = mAllAnswers - mCorrectAnswers;
+        int mAllAnswers = mIntent.getIntExtra("allAnswers", 10);
+        int mCorrectAnswers = mIntent.getIntExtra("correctAnswers", 4);
+        int mIncorrectAnswers = mAllAnswers - mCorrectAnswers;
 
-        scoreRating = (TextView) findViewById(R.id.score_rating);
+        scoreRating = findViewById(R.id.score_rating);
 
         switch (mCorrectAnswers) {
             case 1:
@@ -118,6 +108,4 @@ public class ResultsActivity extends AppCompatActivity {
     public void setScoreRating(String scoreRatingText) {
         scoreRating.setText(scoreRatingText);
     }
-
-
 }

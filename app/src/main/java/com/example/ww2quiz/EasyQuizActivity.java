@@ -1,4 +1,4 @@
-package com.example.android.ww2quiz;
+package com.example.ww2quiz;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +8,6 @@ import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -20,8 +19,6 @@ public class EasyQuizActivity extends AppCompatActivity {
 
     private Button mTrueButton;
     private Button mFalseButton;
-    private ImageButton mNextButton;
-    private ImageButton mPrevButton;
     private TextView mQuestionTextView;
     private ImageView mHeaderImage;
     private ProgressBar mProgressBar;
@@ -33,7 +30,6 @@ public class EasyQuizActivity extends AppCompatActivity {
     private static final String KEY_INDEX4 = "index4";
     private static final String KEY_INDEX5 = "index5";
 
-
     private boolean mIsTrueButtonGreen;
     private boolean mIsTrueButtonRed;
     private boolean mIsFalseButtonGreen;
@@ -43,7 +39,6 @@ public class EasyQuizActivity extends AppCompatActivity {
 
     private int mAllAnswers;
     private int mCorrectAnswers;
-
 
     private Question[] mQuestionBankEasy = new Question[]
             {
@@ -69,95 +64,78 @@ public class EasyQuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quiz);
 
-
-        mTrueButton = (Button) findViewById(R.id.true_button);
-        mFalseButton = (Button) findViewById(R.id.false_button);
+        mTrueButton = findViewById(R.id.true_button);
+        mFalseButton = findViewById(R.id.false_button);
         mCorrectAnswerColor = getResources().getColor(R.color.correctAnswerButton);
         mIncorrectAnswerColor = getResources().getColor(R.color.incorrectAnswerButton);
 
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
 
-            if(savedInstanceState.getBoolean(KEY_INDEX2, false)) {
+            if (savedInstanceState.getBoolean(KEY_INDEX2, false)) {
                 mTrueButton.getBackground().setColorFilter(mCorrectAnswerColor, PorterDuff.Mode.MULTIPLY);
             }
 
-            if(savedInstanceState.getBoolean(KEY_INDEX3, false)) {
+            if (savedInstanceState.getBoolean(KEY_INDEX3, false)) {
                 mTrueButton.getBackground().setColorFilter(mIncorrectAnswerColor, PorterDuff.Mode.MULTIPLY);
             }
 
-            if(savedInstanceState.getBoolean(KEY_INDEX4, false)) {
+            if (savedInstanceState.getBoolean(KEY_INDEX4, false)) {
                 mFalseButton.getBackground().setColorFilter(mCorrectAnswerColor, PorterDuff.Mode.MULTIPLY);
             }
 
-            if(savedInstanceState.getBoolean(KEY_INDEX5, false)) {
+            if (savedInstanceState.getBoolean(KEY_INDEX5, false)) {
                 mFalseButton.getBackground().setColorFilter(mIncorrectAnswerColor, PorterDuff.Mode.MULTIPLY);
             }
         }
 
-        mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
+        mQuestionTextView = findViewById(R.id.question_text_view);
         updateQuestion();
 
         mAllAnswers = mQuestionBankEasy.length;
 
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        mProgressBar = findViewById(R.id.progressBar);
         mProgressBar.setProgress(mCurrentIndex);
         mProgressBar.setMax(10);
 
-        mHeaderImage = (ImageView) findViewById(R.id.header_image);
+        mHeaderImage = findViewById(R.id.header_image);
 
-        mNextButton = (ImageButton) findViewById(R.id.next_button);
-        mNextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isSaved = false;
-                if (mCurrentIndex >= mQuestionBankEasy.length - 1) {
-                    Intent mIntent = new Intent(EasyQuizActivity.this, ResultsActivity.class);
-                    mIntent.putExtra("allAnswers", mAllAnswers);
-                    mIntent.putExtra("correctAnswers", mCorrectAnswers);
-                    startActivity(mIntent);
-                } else {
-                    mCurrentIndex += 1;
-                    updateQuestion();
-                    mProgressBar.setProgress(mCurrentIndex);
-                    mTrueButton.getBackground().clearColorFilter();
-                    mFalseButton.getBackground().clearColorFilter();
-                }
-                Log.i(TAG, "Current index" + mCurrentIndex);
+        ImageButton mNextButton = findViewById(R.id.next_button);
+        mNextButton.setOnClickListener(v -> {
+            isSaved = false;
+            if (mCurrentIndex >= mQuestionBankEasy.length - 1) {
+                Intent mIntent = new Intent(EasyQuizActivity.this, ResultsActivity.class);
+                mIntent.putExtra("allAnswers", mAllAnswers);
+                mIntent.putExtra("correctAnswers", mCorrectAnswers);
+                startActivity(mIntent);
+            } else {
+                mCurrentIndex += 1;
+                updateQuestion();
+                mProgressBar.setProgress(mCurrentIndex);
+                mTrueButton.getBackground().clearColorFilter();
+                mFalseButton.getBackground().clearColorFilter();
             }
+            Log.i(TAG, "Current index" + mCurrentIndex);
         });
 
-        mPrevButton = (ImageButton) findViewById(R.id.prev_button);
-        mPrevButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mCurrentIndex != 0) {
-                    mCurrentIndex -= 1;
-                    updateQuestion();
-                    mProgressBar.setProgress(mCurrentIndex);
-                    mTrueButton.getBackground().clearColorFilter();
-                    mFalseButton.getBackground().clearColorFilter();
-                } else {
-                    Intent mIntent = new Intent(EasyQuizActivity.this, MainActivity.class);
-                    startActivity(mIntent);
-                }
+        ImageButton mPrevButton = findViewById(R.id.prev_button);
+        mPrevButton.setOnClickListener(v -> {
+            if (mCurrentIndex != 0) {
+                mCurrentIndex -= 1;
+                updateQuestion();
+                mProgressBar.setProgress(mCurrentIndex);
+                mTrueButton.getBackground().clearColorFilter();
+                mFalseButton.getBackground().clearColorFilter();
+            } else {
+                Intent mIntent = new Intent(EasyQuizActivity.this, MainActivity.class);
+                startActivity(mIntent);
             }
         });
 
 
-        mTrueButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkAnswer(true);
-            }
-        });
+        mTrueButton.setOnClickListener(v -> checkAnswer(true));
 
-        mFalseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkAnswer(false);
-            }
-        });
+        mFalseButton.setOnClickListener(v -> checkAnswer(false));
     }
 
     @Override
@@ -176,7 +154,7 @@ public class EasyQuizActivity extends AppCompatActivity {
         int question = mQuestionBankEasy[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
 
-        mHeaderImage = (ImageView) findViewById(R.id.header_image);
+        mHeaderImage = findViewById(R.id.header_image);
         int picResId = mQuestionBankEasy[mCurrentIndex].getPicResId();
         mHeaderImage.setImageResource(picResId);
     }
@@ -212,7 +190,8 @@ public class EasyQuizActivity extends AppCompatActivity {
 
                     Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
                     // Vibrate for 150 milliseconds
-                    v.vibrate(150);
+                    if (v != null)
+                        v.vibrate(150);
                 } else {
                     mFalseButton.getBackground().setColorFilter(mIncorrectAnswerColor, PorterDuff.Mode.MULTIPLY);
                     mTrueButton.getBackground().setColorFilter(mCorrectAnswerColor, PorterDuff.Mode.MULTIPLY);
@@ -223,7 +202,8 @@ public class EasyQuizActivity extends AppCompatActivity {
 
                     Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
                     // Vibrate for 150 milliseconds
-                    v.vibrate(100);
+                    if (v != null)
+                        v.vibrate(100);
                 }
             }
         } else {

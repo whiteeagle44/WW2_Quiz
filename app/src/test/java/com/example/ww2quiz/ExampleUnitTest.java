@@ -1,4 +1,4 @@
-package com.example.android.ww2quiz;
+package com.example.ww2quiz;
 
 import org.junit.Test;
 
