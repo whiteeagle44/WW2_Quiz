@@ -5,6 +5,9 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.PieChart;
@@ -21,6 +24,7 @@ import static com.example.ww2quiz.R.id.chart;
 public class ResultsActivity extends AppCompatActivity {
 
     private TextView scoreRating;
+    private ImageButton mNextButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,6 +39,15 @@ public class ResultsActivity extends AppCompatActivity {
         int mIncorrectAnswers = mAllAnswers - mCorrectAnswers;
 
         scoreRating = findViewById(R.id.score_rating);
+
+        mNextButton = (ImageButton) findViewById(R.id.next_button);
+        mNextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mIntent = new Intent(ResultsActivity.this, MainActivity.class);
+                startActivity(mIntent);
+            }
+        });
 
         switch (mCorrectAnswers) {
             case 1:
@@ -99,7 +112,6 @@ public class ResultsActivity extends AppCompatActivity {
         pieChart.setHoleRadius(80f);
         pieChart.setData(data);
         pieChart.setDescription(null);
-        pieChart.setDrawSliceText(false);
         pieChart.setDrawEntryLabels(false);
         pieChart.invalidate(); // refresh
 

@@ -3,6 +3,10 @@ package com.example.ww2quiz;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
 //        easyModeFr = (FrameLayout) findViewById(R.id.frame_layout_easy);
 //        mediumModeFr = (FrameLayout) findViewById(R.id.frame_layout_medium);
 //        hardModeFr = (FrameLayout) findViewById(R.id.frame_layout_hard);
-
 
     }
 }
