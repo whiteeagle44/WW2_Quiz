@@ -14,7 +14,3 @@ On Google Play Store a fully featured version with an old code base can be found
 
 ## Download
 [Google Play Store](https://play.google.com/store/apps/details?id=com.pakita.ww2quiz)
-
-![Screenshot 1](screen1.png)
-![Screenshot 2](screen2.png)
-![Screenshot 3](screen3.png)
