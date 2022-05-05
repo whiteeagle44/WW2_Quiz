@@ -1,4 +1,4 @@
-package com.example.ww2quiz;
+package com.pakita.ww2quiz;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class HardQuizActivity extends AppCompatActivity {
+public class MediumQuizActivity extends AppCompatActivity {
     private Button mTrueButton;
     private Button mFalseButton;
     private TextView mQuestionTextView;
@@ -39,19 +39,21 @@ public class HardQuizActivity extends AppCompatActivity {
     private int mAllAnswers;
     private int mCorrectAnswers;
 
+
     private Question[] mQuestionBankEasy = new Question[]
             {
-                    new Question(R.string.question_one_easy, false, R.drawable.ww2_hard1),
-                    new Question(R.string.question_two_easy, false, R.drawable.ww2_hard2),
-                    new Question(R.string.question_three_easy, true, R.drawable.ww2_hard3),
-                    new Question(R.string.question_four_easy, false, R.drawable.ww2_hard4),
-                    new Question(R.string.question_five_easy, true, R.drawable.ww2_hard5),
-                    new Question(R.string.question_one_easy, true, R.drawable.ww2_hard6),
-                    new Question(R.string.question_two_easy, false, R.drawable.ww2_hard7),
-                    new Question(R.string.question_three_easy, false, R.drawable.ww2_hard8),
-                    new Question(R.string.question_four_easy, true, R.drawable.ww2_hard9),
-                    new Question(R.string.question_five_easy, true, R.drawable.ww2_hard10),
+                    new Question(R.string.question_one_easy, false, R.drawable.ww2_medium1),
+                    new Question(R.string.question_two_easy, false, R.drawable.ww2_medium2),
+                    new Question(R.string.question_three_easy, true, R.drawable.ww2_medium3),
+                    new Question(R.string.question_four_easy, false, R.drawable.ww2_medium4),
+                    new Question(R.string.question_five_easy, true, R.drawable.ww2_medium5),
+                    new Question(R.string.question_one_easy, true, R.drawable.ww2_medium6),
+                    new Question(R.string.question_two_easy, false, R.drawable.ww2_medium7),
+                    new Question(R.string.question_three_easy, false, R.drawable.ww2_medium8),
+                    new Question(R.string.question_four_easy, true, R.drawable.ww2_medium9),
+                    new Question(R.string.question_five_easy, true, R.drawable.ww2_medium10),
             };
+
 
     private int mCurrentIndex = 0;
 
@@ -63,7 +65,7 @@ public class HardQuizActivity extends AppCompatActivity {
         mCorrectAnswerColor = getResources().getColor(R.color.correctAnswerButton);
         mIncorrectAnswerColor = getResources().getColor(R.color.incorrectAnswerButton);
 
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
 
 //            if(savedInstanceState.getBoolean(KEY_INDEX2, false)) {
@@ -96,8 +98,8 @@ public class HardQuizActivity extends AppCompatActivity {
 
         ImageButton mNextButton = findViewById(R.id.next_button);
         mNextButton.setOnClickListener(v -> {
-            if(mCurrentIndex >= mQuestionBankEasy.length - 1) {
-                Intent mIntent = new Intent(HardQuizActivity.this, ResultsActivity.class);
+            if (mCurrentIndex >= mQuestionBankEasy.length - 1) {
+                Intent mIntent = new Intent(MediumQuizActivity.this, ResultsActivity.class);
                 mIntent.putExtra("allAnswers", mAllAnswers);
                 mIntent.putExtra("correctAnswers", mCorrectAnswers);
                 startActivity(mIntent);
@@ -114,17 +116,18 @@ public class HardQuizActivity extends AppCompatActivity {
 
         ImageButton mPrevButton = findViewById(R.id.prev_button);
         mPrevButton.setOnClickListener(v -> {
-            if(mCurrentIndex != 0) {
+            if (mCurrentIndex != 0) {
                 mCurrentIndex -= 1;
                 updateQuestion();
                 mProgressBar.setProgress(mCurrentIndex);
                 mTrueButton.getBackground().clearColorFilter();
                 mFalseButton.getBackground().clearColorFilter();
             } else {
-                Intent mIntent = new Intent(HardQuizActivity.this, MainActivity.class);
+                Intent mIntent = new Intent(MediumQuizActivity.this, MainActivity.class);
                 startActivity(mIntent);
             }
         });
+
 
         mTrueButton = findViewById(R.id.true_button);
         mFalseButton = findViewById(R.id.false_button);
@@ -150,30 +153,27 @@ public class HardQuizActivity extends AppCompatActivity {
         int question = mQuestionBankEasy[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
 
-        mHeaderImage = findViewById(R.id.header_image);
+        mHeaderImage = (ImageView) findViewById(R.id.header_image);
         int picResId = mQuestionBankEasy[mCurrentIndex].getPicResId();
         mHeaderImage.setImageResource(picResId);
     }
-
-
-
 
 
     private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mQuestionBankEasy[mCurrentIndex].isAnswerTrue();
         boolean answerRated = mQuestionBankEasy[mCurrentIndex].isAnswerRated();
 
-        if(!answerRated) {
+        if (!answerRated) {
             if (userPressedTrue == answerIsTrue) {
                 if (userPressedTrue) {
                     mTrueButton.getBackground().setColorFilter(mCorrectAnswerColor, PorterDuff.Mode.MULTIPLY);
                     mIsTrueButtonGreen = true;
-                    mCorrectAnswers+=1;
+                    mCorrectAnswers += 1;
                     mQuestionBankEasy[mCurrentIndex].setAnswerRated(true);
                 } else {
                     mFalseButton.getBackground().setColorFilter(mCorrectAnswerColor, PorterDuff.Mode.MULTIPLY);
                     mIsFalseButtonGreen = true;
-                    mCorrectAnswers+=1;
+                    mCorrectAnswers += 1;
                     mQuestionBankEasy[mCurrentIndex].setAnswerRated(true);
 
                 }

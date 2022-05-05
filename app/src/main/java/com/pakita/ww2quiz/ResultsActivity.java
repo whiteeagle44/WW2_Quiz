@@ -1,4 +1,4 @@
-package com.example.ww2quiz;
+package com.pakita.ww2quiz;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -19,7 +19,7 @@ import com.github.mikephil.charting.data.PieEntry;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.ww2quiz.R.id.chart;
+import static com.pakita.ww2quiz.R.id.chart;
 
 public class ResultsActivity extends AppCompatActivity {
 

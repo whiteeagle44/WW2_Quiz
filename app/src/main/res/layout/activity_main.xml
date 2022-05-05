@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.ww2quiz.MainActivity">
+    tools:context="com.pakita.ww2quiz.MainActivity">
 
 
     <LinearLayout

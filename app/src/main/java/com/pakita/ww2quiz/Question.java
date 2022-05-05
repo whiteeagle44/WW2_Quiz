@@ -1,4 +1,4 @@
-package com.example.ww2quiz;
+package com.pakita.ww2quiz;
 
 public class Question {
 

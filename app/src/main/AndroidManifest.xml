@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ww2quiz">
-<uses-permission android:name="android.permission.VIBRATE" />
+    package="com.pakita.ww2quiz">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -11,23 +11,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EasyQuizActivity"
-            android:label="WW2 Quiz"/>
-        <activity android:name=".MediumQuizActivity"
-            android:label="WW2 Quiz"/>
-        <activity android:name=".HardQuizActivity"
-            android:label="WW2 Quiz"/>
-        <activity android:name=".ResultsActivity"
-                  android:label="WW2 Quiz"/>
-
+        <activity
+            android:name=".EasyQuizActivity"
+            android:label="WW2 Quiz" />
+        <activity
+            android:name=".MediumQuizActivity"
+            android:label="WW2 Quiz" />
+        <activity
+            android:name=".HardQuizActivity"
+            android:label="WW2 Quiz" />
+        <activity
+            android:name=".ResultsActivity"
+            android:label="WW2 Quiz" />
     </application>
-
-
 </manifest>
